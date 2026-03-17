@@ -11,7 +11,7 @@ RUN ssh-keygen -A && \
 
 RUN mkdir -p /root/module
 
-COPY escape.c /root/module/escape.c
+COPY module.c /root/module/module.c
 COPY Makefile /root/module/Makefile
 COPY motd /etc/motd
 COPY entrypoint.sh /entrypoint.sh

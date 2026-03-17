@@ -1,4 +1,4 @@
-obj-m += escape.o
+obj-m += module.o
 KDIR := /usr/src/linux-headers-$(shell uname -r)
 all:
 	make -C $(KDIR) M=$(PWD) modules

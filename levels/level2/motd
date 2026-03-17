@@ -27,5 +27,5 @@
   Config:  /etc/backup-agent/config.yml
   Logs:    /var/log/backup-agent/agent.log
 
-  Read /hint for guidance. Read /solution when you give up.
+  Read /hint for guidance. Read /solution for the answer.
 
