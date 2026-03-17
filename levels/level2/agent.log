@@ -1,0 +1,5 @@
+2024-03-15 02:00:01 INFO  Starting backup cycle
+2024-03-15 02:00:01 INFO  Connecting to Docker socket: /var/run/docker.sock
+2024-03-15 02:00:02 INFO  Found 4 running containers
+2024-03-15 02:00:02 INFO  Snapshotting internal-dashboard:/data/uploads (2.3GB)
+2024-03-15 02:04:33 INFO  Backup complete. Duration: 4m32s

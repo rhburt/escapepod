@@ -1,0 +1,9 @@
+HINT — Level 2: Docker Socket Escape
+
+The Docker daemon communicates via a Unix socket.
+If that socket is accessible from inside a container,
+you can use it to talk to the Docker daemon directly —
+and the daemon runs as root on the host.
+
+Look for the socket. Check what's mounted in this container.
+The docker CLI can speak to any socket you point it at.

@@ -1,0 +1,31 @@
+
+┌─────────────────────────────────────────┐
+│                                         │
+│   ███████╗███████╗ ██████╗              │
+│   ██╔════╝██╔════╝██╔════╝             │
+│   █████╗  ███████╗██║                  │
+│   ██╔══╝  ╚════██║██║                  │
+│   ███████╗███████║╚██████╗             │
+│   ╚══════╝╚══════╝ ╚═════╝             │
+│                                         │
+│   ██████╗  ██████╗ ██████╗             │
+│   ██╔══██╗██╔═══██╗██╔══██╗            │
+│   ██████╔╝██║   ██║██║  ██║            │
+│   ██╔═══╝ ██║   ██║██║  ██║            │
+│   ██║     ╚██████╔╝██████╔╝            │
+│   ╚═╝      ╚═════╝ ╚═════╝             │
+│                                         │
+│   escape the container. you are the last level.          │
+│                                         │
+└─────────────────────────────────────────┘
+
+  [ kernel-monitor dev container ]
+
+  Development environment for kernel monitoring tooling.
+  Kernel headers and build tools are available.
+  This container has permission to load kernel modules.
+
+  Module source: /root/module/
+
+  Read /hint for guidance. Read /solution when you give up.
+

@@ -1,0 +1,5 @@
+SOLUTION — Level 1: Credential Discovery
+
+cat /var/www/html/config.php
+
+The DB_PASS value is the SSH password for the next level.

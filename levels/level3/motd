@@ -1,0 +1,31 @@
+
+┌─────────────────────────────────────────┐
+│                                         │
+│   ███████╗███████╗ ██████╗              │
+│   ██╔════╝██╔════╝██╔════╝             │
+│   █████╗  ███████╗██║                  │
+│   ██╔══╝  ╚════██║██║                  │
+│   ███████╗███████║╚██████╗             │
+│   ╚══════╝╚══════╝ ╚═════╝             │
+│                                         │
+│   ██████╗  ██████╗ ██████╗             │
+│   ██╔══██╗██╔═══██╗██╔══██╗            │
+│   ██████╔╝██║   ██║██║  ██║            │
+│   ██╔═══╝ ██║   ██║██║  ██║            │
+│   ██║     ╚██████╔╝██████╔╝            │
+│   ╚═╝      ╚═════╝ ╚═════╝             │
+│                                         │
+│   escape the container. read /flag for the next level. │
+│                                         │
+└─────────────────────────────────────────┘
+
+  [ report-exporter v1.4.0 ]
+
+  Generates scheduled PDF exports of analytics dashboards.
+  Ops scripts are mounted from the host for easy updates.
+
+  App:     /app/exporter.py
+  Scripts: /host-scripts/
+
+  Read /hint for guidance. Read /solution when you give up.
+

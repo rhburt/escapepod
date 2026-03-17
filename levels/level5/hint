@@ -1,0 +1,16 @@
+HINT — Level 5: Kernel Module Escape
+
+The Linux kernel can be extended at runtime by loading
+kernel modules (LKMs). A process with CAP_SYS_MODULE can
+call insmod to load a .ko file into the running kernel.
+
+Code running inside a kernel module executes in kernel space —
+outside any container, namespace, or cgroup boundary. It has
+unrestricted access to the entire host system.
+
+call_usermodehelper() is a kernel function that spawns a
+userspace process as root on the host. A kernel module that
+calls it executes arbitrary commands with full host privileges
+the moment it is loaded, regardless of what container you are in.
+
+Build the module. Load it.

@@ -1,0 +1,12 @@
+HINT — Level 4: Process Environment Leak
+
+When a container shares the host's PID namespace, it can
+see all processes running on the host — including those
+belonging to other containers and services.
+
+Each process in Linux exposes its environment variables
+via /proc/<pid>/environ. Applications sometimes load
+secrets into environment variables at startup.
+
+Enumerate the processes you can see. Look for ones that
+might be holding credentials in their environment.

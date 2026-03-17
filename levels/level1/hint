@@ -1,0 +1,10 @@
+HINT — Level 1: Credential Discovery
+
+Web applications often connect to databases using credentials
+stored in configuration files. Developers sometimes hardcode
+these credentials directly in the source code rather than
+using environment variables or secrets managers.
+
+Look through the PHP application files. Configuration files
+typically define database host, username, and password.
+The password you find may be useful elsewhere.

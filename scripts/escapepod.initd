@@ -1,0 +1,64 @@
+#!/sbin/openrc-run
+
+name="wargame"
+description="EscapePod — start all level containers"
+
+depend() {
+    need docker
+    after local
+}
+
+start() {
+    ebegin "Starting wargame level containers"
+
+    # Start rootless daemons first
+    /etc/local.d/wargame-daemons.start
+
+    # Give daemons time to come up
+    sleep 5
+
+    # Start each level container under its user
+    for i in $(seq 1 10); do
+        USER="level${i}"
+        UID_VAL=$((1000 + i))
+        PORT=$((2220 + i))
+        LEVEL="level$(printf '%02d' $i)"
+        DIR="/opt/escapepod/levels/${LEVEL}"
+
+        su -l "$USER" -c "
+            export XDG_RUNTIME_DIR=/run/user/${UID_VAL}
+            export DOCKER_HOST=unix:///run/user/${UID_VAL}/docker.sock
+            sh ${DIR}/run.sh ${PORT}
+        " >> /var/log/wargame.log 2>&1
+
+        einfo "  Level ${i} started on port ${PORT}"
+    done
+
+    eend $?
+}
+
+stop() {
+    ebegin "Stopping wargame level containers"
+
+    for i in $(seq 1 10); do
+        USER="level${i}"
+        UID_VAL=$((1000 + i))
+
+        su -l "$USER" -c "
+            export XDG_RUNTIME_DIR=/run/user/${UID_VAL}
+            export DOCKER_HOST=unix:///run/user/${UID_VAL}/docker.sock
+            docker rm -f level$(printf '%02d' $i) \
+                         level$(printf '%02d' $i)-outer \
+                         level$(printf '%02d' $i)-secret \
+                         level$(printf '%02d' $i)-victim 2>/dev/null || true
+        "
+    done
+
+    eend $?
+}
+
+restart() {
+    stop
+    sleep 2
+    start
+}

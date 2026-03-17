@@ -1,0 +1,10 @@
+HINT — Level 3: Writable Host-Mounted Script
+
+When a file from the host is bind-mounted into a container,
+writes to that file inside the container modify the real file
+on the host. If a host process executes that file on a schedule,
+you can inject commands that run outside the container.
+
+Look at what's in /host-scripts/. Figure out what runs it
+and how often. Then think about what you can write into it.
+Output needs to go somewhere you can read from inside the container.

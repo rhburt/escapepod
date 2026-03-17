@@ -1,0 +1,31 @@
+
+┌─────────────────────────────────────────┐
+│                                         │
+│   ███████╗███████╗ ██████╗              │
+│   ██╔════╝██╔════╝██╔════╝             │
+│   █████╗  ███████╗██║                  │
+│   ██╔══╝  ╚════██║██║                  │
+│   ███████╗███████║╚██████╗             │
+│   ╚══════╝╚══════╝ ╚═════╝             │
+│                                         │
+│   ██████╗  ██████╗ ██████╗             │
+│   ██╔══██╗██╔═══██╗██╔══██╗            │
+│   ██████╔╝██║   ██║██║  ██║            │
+│   ██╔═══╝ ██║   ██║██║  ██║            │
+│   ██║     ╚██████╔╝██████╔╝            │
+│   ╚═╝      ╚═════╝ ╚═════╝             │
+│                                         │
+│        find the password inside this container.         │
+│                                         │
+└─────────────────────────────────────────┘
+
+  [ metrics-collector v2.0 ]
+
+  Collects infrastructure metrics by reading process stats
+  directly from /proc. Runs with host PID namespace access
+  to observe all system processes.
+
+  Collector: /app/collector.sh
+
+  Read /hint for guidance. Read /solution when you give up.
+

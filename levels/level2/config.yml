@@ -1,0 +1,11 @@
+# backup-agent configuration
+version: "2.3.1"
+target: s3://infra-backups/prod
+schedule: "0 2 * * *"
+docker_socket: /var/run/docker.sock
+containers:
+  - name: internal-dashboard
+    volumes: [/data/uploads]
+  - name: report-exporter
+    volumes: [/data/exports]
+log_level: info
