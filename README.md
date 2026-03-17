@@ -24,15 +24,11 @@
 
 A wargame challenge for Docker container escaping.
 
-Ten levels. Ten misconfigurations. No instructions beyond a nudge in the MOTD.
-
 ---
 
 ## The Premise
 
-Each level SSHs you into a deliberately misconfigured Docker container. Your job is to escape it and read the flag on the host, which contains the SSH password to the next level. Techniques range from trivially obvious to genuinely technical.
-
-This is not a CTF platform. There's no scoreboard, no hints system, no walkthrough. The confusion is part of the learning.
+Each level SSHs you into a deliberately misconfigured Docker container. Your job is to escape it and read the flag on the host or find the flag within the container. The flag is the SSH password to the next level.
 
 ---
 
@@ -47,8 +43,6 @@ This is not a CTF platform. There's no scoreboard, no hints system, no walkthrou
 | 02 | Docker socket exposed | Beginner |
 | 03 | Writable host-mounted script | Beginner–Intermediate |
 | 04 | Shared PID namespace + `/proc` environment leak | Intermediate |
-| 05 | `CAP_SYS_MODULE` + malicious kernel module | Expert |
-| 04 | `/proc/PID/root` filesystem traversal | Intermediate–Advanced |
 | 05 | `CAP_SYS_MODULE` + malicious kernel module | Expert |
 
 </details>
@@ -111,9 +105,9 @@ ssh -p 2221 root@localhost
 
 ### Security Model
 
-Each level runs under its own unprivileged user (`level1` through `level10`, UIDs 1001–1010) with its own rootless Docker daemon. Container UID 0 (root) maps to the corresponding host user via `subuid`/`subgid`. When you escape a container, you land as `levelN` on the VM host — not root.
+Each level runs under its own unprivileged user (`level1` through `level10`, UIDs 1001–1010) with its own rootless Docker daemon. Container UID 0 (root) maps to the corresponding host user via `subuid`/`subgid`. When you escape a container, you land as `levelN` on the VM host instead of root.
 
-Flags live at `/flags/levelNN` on the host. Each flag is owned by the user you become after a successful escape, with `chmod 400`. Reading it gives you the SSH password to the next level.
+Flags live at `/flags/levelN` on the host. Each flag is owned by the user you become after a successful escape, with `chmod 400`. Reading it gives you the SSH password to the next level.
 
 ```
 SSH into level1 container as root
@@ -145,7 +139,11 @@ Alpine Linux VM
 │   ├── rootless dockerd  (/run/user/1002/docker.sock)
 │   └── level2 container  (host:2222 → VM:12222 → container:22)
 │
-└── ... levels 3–10 follow the same pattern
+└── ... levels 3 & 4 follow the same pattern
+│
+├── level2 user (UID 1002)
+│   ├── root dockerd  (/var/run/docker.sock)
+│   └── level5 container  (host:2225 → VM:12225 → container:22)
 ```
 
 ### Port Forwarding
@@ -155,15 +153,6 @@ QEMU's slirp network and rootlesskit both use slirp4netns internally, which conf
 ```
 Your machine:2221  →  VM:12221  →  container:22
 ```
-
-### Levels Using Nested Containers
-
-Levels 02 and 10 use a nested outer container as a fake host to safely simulate escapes that need kernel-level access without exposing the real VM:
-
-- **Level 02**: The outer container sets up a loopback block device. The inner privileged container mounts and chroots into it.
-- **Level 10**: The outer container has its own runc binary. The inner container exploits CVE-2019-5736 to overwrite it.
-
----
 
 ## Building from Source
 
@@ -199,7 +188,7 @@ packer build escapepod.pkr.hcl
 
 Output: `output/escapepod.qcow2`
 
-Build time is approximately 15–25 minutes, most of which is Docker image builds inside the VM.
+Build time is approximately 5-10 minutes, most of which is Docker image builds inside the VM.
 
 ---
 
@@ -232,15 +221,6 @@ escapepod/
 1. Create `levels/levelNN/` with `Dockerfile`, `entrypoint.sh`, `run.sh`, and `motd`
 2. Update the loop bounds in `01-users.sh`, `02-docker.sh`, and `05-build-levels.sh` from `seq 1 5` to `seq 1 NN`
 3. Rebuild with Packer
-
----
-
-## Rules
-
-- Don't brute force passwords
-- Don't read flags you haven't earned
-- Reboot the VM if something breaks — it's designed to be disposable
-- The MOTD is your only hint
 
 ---
 
