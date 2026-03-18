@@ -35,7 +35,7 @@ Each level SSHs you into a deliberately misconfigured Docker container. Your job
 ## Levels
 
 <details>
-<summary>Show techniques (spoilers)</summary>
+<summary>Show techniques (**SPOILERS**)</summary>
 
 | # | Technique | Difficulty |
 |---|-----------|------------|
@@ -94,8 +94,6 @@ ssh -p 2221 root@localhost
 | 01 | 2221 |
 | 02 | 2222 |
 | 03 | 2223 |
-| 04 | 2224 |
-| 05 | 2225 |
 | 04 | 2224 |
 | 05 | 2225 |
 
